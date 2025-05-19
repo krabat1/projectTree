@@ -1,0 +1,30 @@
+{
+  "index.js": {
+    "path": "index.js",
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/index.js"
+  },
+  "package.json": {
+    "path": "package.json",
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/package.json"
+  },
+  "projectTree.json": {
+    "path": "projectTree.json",
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/projectTree.json"
+  },
+  "README.md": {
+    "path": "README.md",
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/README.md"
+  },
+  "testFolder": {
+    "testFile.js": {
+      "path": "testFolder\\testFile.js",
+      "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/testFolder/testFile.js"
+    },
+    "testFolder copy": {
+      "testFile.js": {
+        "path": "testFolder\\testFolder copy\\testFile.js",
+        "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/testFolder/testFolder copy/testFile.js"
+      }
+    }
+  }
+}
