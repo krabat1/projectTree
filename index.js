@@ -400,13 +400,11 @@ function prompt(question) {
             /** @type {string} */
             const relPath = path.relative(baseDir, fullPath);
 
-            if (!entry.isDirectory()) {
-                if (isIgnored(relPath)) logger.trace('❌ DROP ignored: ', relPath, '\r\n\r\n------------------------------\r\n')
-                if (isIgnored(relPath)) continue;
-                logger.trace('✅ KEEP not ignored: ', relPath)
-                if (!hashMode) {
-                    logger.trace('', '\r\n------------------------------\r\n')
-                }
+            if (isIgnored(relPath)) logger.trace('❌ DROP ignored: ', relPath, '\r\n\r\n------------------------------\r\n')
+            if (isIgnored(relPath)) continue;
+            logger.trace('✅ KEEP not ignored: ', relPath)
+            if (!hashMode) {
+                logger.trace('', '\r\n------------------------------\r\n')
             }
 
             /** @type {TreeItem} */
@@ -442,9 +440,10 @@ function prompt(question) {
 
             }
 
-            if (!entry.isDirectory()) {
+            if( !(item.type === "directory" && item.children?.length === 0) ){
                 results.push(item);
             }
+            
 
         }
         return results;

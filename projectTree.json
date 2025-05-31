@@ -4,41 +4,90 @@
     "name": ".gitignore",
     "path": ".gitignore",
     "size": 2275,
-    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/.gitignore"
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/.gitignore"
   },
   {
     "type": "file",
     "name": ".ptignore",
     "path": ".ptignore",
-    "size": 71,
-    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/.ptignore"
+    "size": 58,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/.ptignore"
+  },
+  {
+    "type": "file",
+    "name": "eslint.config.js",
+    "path": "eslint.config.js",
+    "size": 438,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/eslint.config.js"
   },
   {
     "type": "file",
     "name": "index.js",
     "path": "index.js",
-    "size": 17171,
-    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/index.js"
+    "size": 15843,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/index.js"
+  },
+  {
+    "type": "file",
+    "name": "jsconfig.json",
+    "path": "jsconfig.json",
+    "size": 416,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/jsconfig.json"
+  },
+  {
+    "type": "file",
+    "name": "package-lock.json",
+    "path": "package-lock.json",
+    "size": 42275,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/package-lock.json"
   },
   {
     "type": "file",
     "name": "package.json",
     "path": "package.json",
     "size": 480,
-    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/package.json"
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/package.json"
   },
   {
     "type": "file",
     "name": "projectTree.json",
     "path": "projectTree.json",
-    "size": 446,
-    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/projectTree.json"
+    "size": 2786,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/projectTree.json"
   },
   {
     "type": "file",
     "name": "README.md",
     "path": "README.md",
     "size": 252,
-    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/README.md"
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/README.md"
+  },
+  {
+    "type": "directory",
+    "name": "testFolder",
+    "path": "testFolder",
+    "children": [
+      {
+        "type": "file",
+        "name": "testFile.js",
+        "path": "testFolder/testFile.js",
+        "size": 29,
+        "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/testFolder/testFile.js"
+      },
+      {
+        "type": "directory",
+        "name": "testFolder copy",
+        "path": "testFolder/testFolder copy",
+        "children": [
+          {
+            "type": "file",
+            "name": "testFile.js",
+            "path": "testFolder/testFolder copy/testFile.js",
+            "size": 29,
+            "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/testFolder/testFolder copy/testFile.js"
+          }
+        ]
+      }
+    ]
   }
 ]

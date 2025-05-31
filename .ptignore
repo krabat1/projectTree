@@ -4,4 +4,3 @@ test-fixtures/
 .git
 .DS_Store
 Thumbs.db
-testFolder/
