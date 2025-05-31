@@ -1,30 +1,44 @@
-{
-  "index.js": {
+[
+  {
+    "type": "file",
+    "name": ".gitignore",
+    "path": ".gitignore",
+    "size": 2275,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/.gitignore"
+  },
+  {
+    "type": "file",
+    "name": ".ptignore",
+    "path": ".ptignore",
+    "size": 71,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/.ptignore"
+  },
+  {
+    "type": "file",
+    "name": "index.js",
     "path": "index.js",
-    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/index.js"
+    "size": 17171,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/index.js"
   },
-  "package.json": {
+  {
+    "type": "file",
+    "name": "package.json",
     "path": "package.json",
-    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/package.json"
+    "size": 480,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/package.json"
   },
-  "projectTree.json": {
+  {
+    "type": "file",
+    "name": "projectTree.json",
     "path": "projectTree.json",
-    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/projectTree.json"
+    "size": 446,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/projectTree.json"
   },
-  "README.md": {
+  {
+    "type": "file",
+    "name": "README.md",
     "path": "README.md",
-    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/README.md"
-  },
-  "testFolder": {
-    "testFile.js": {
-      "path": "testFolder\\testFile.js",
-      "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/testFolder/testFile.js"
-    },
-    "testFolder copy": {
-      "testFile.js": {
-        "path": "testFolder\\testFolder copy\\testFile.js",
-        "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/testFolder/testFolder copy/testFile.js"
-      }
-    }
+    "size": 252,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/251cb31aa1d3c7357b6666c2d907e23df42f8b3c/README.md"
   }
-}
+]

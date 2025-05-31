@@ -1,2 +1,7 @@
+lib/
+test-fixtures/
+**/*.log
 .git
-.ptignore
+.DS_Store
+Thumbs.db
+testFolder/
