@@ -59,7 +59,7 @@ logger.trace('--verbose: ', verbose, '\n')
 
 if (githubUrl === null) {
     logger.error('❌ --github-url argument is required ');
-    logger.error('     format: <user>/<repo>/<branch>|<commit>');
+    logger.error('     format: <user>/<repo>/<branch|commit>');
     process.exit(1);
 }
 
@@ -189,7 +189,7 @@ async function askIgnores(param) {
 /** @function 
  * @name createIgnore
  * @param {string} filePath
- * @returns {Promise<boolean>}
+ * @returns {Promise<void>}
 */
 async function createIgnore(filePath) {
     /** @type {{
@@ -242,12 +242,10 @@ async function createIgnore(filePath) {
             ptignore: messageDoneText
         }
         logger.step(messageDone[which]);
-        return true;
     } catch (error) {
         console.error(`❌ ${filePath} It failed to create it`);
         console.error(error.stack);
         process.exit(1)
-        return false;
     }
 }
 /**
