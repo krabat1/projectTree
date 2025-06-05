@@ -24,8 +24,15 @@
     "type": "file",
     "name": "index.js",
     "path": "index.js",
-    "size": 15843,
+    "size": 82,
     "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/index.js"
+  },
+  {
+    "type": "file",
+    "name": "index.legacy.js",
+    "path": "index.legacy.js",
+    "size": 15725,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/index.legacy.js"
   },
   {
     "type": "file",
@@ -38,56 +45,84 @@
     "type": "file",
     "name": "package-lock.json",
     "path": "package-lock.json",
-    "size": 42275,
+    "size": 87106,
     "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/package-lock.json"
   },
   {
     "type": "file",
     "name": "package.json",
     "path": "package.json",
-    "size": 480,
+    "size": 467,
     "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/package.json"
   },
   {
     "type": "file",
     "name": "projectTree.json",
     "path": "projectTree.json",
-    "size": 2786,
+    "size": 447,
     "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/projectTree.json"
   },
   {
     "type": "file",
     "name": "README.md",
     "path": "README.md",
-    "size": 252,
+    "size": 3089,
     "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/README.md"
   },
   {
     "type": "directory",
-    "name": "testFolder",
-    "path": "testFolder",
+    "name": "src",
+    "path": "src",
     "children": [
       {
         "type": "file",
-        "name": "testFile.js",
-        "path": "testFolder/testFile.js",
-        "size": 29,
-        "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/testFolder/testFile.js"
+        "name": "cli.js",
+        "path": "src/cli.js",
+        "size": 1161,
+        "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/src/cli.js"
       },
       {
-        "type": "directory",
-        "name": "testFolder copy",
-        "path": "testFolder/testFolder copy",
-        "children": [
-          {
-            "type": "file",
-            "name": "testFile.js",
-            "path": "testFolder/testFolder copy/testFile.js",
-            "size": 29,
-            "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/testFolder/testFolder copy/testFile.js"
-          }
-        ]
+        "type": "file",
+        "name": "core.js",
+        "path": "src/core.js",
+        "size": 15400,
+        "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/src/core.js"
+      },
+      {
+        "type": "file",
+        "name": "interact.js",
+        "path": "src/interact.js",
+        "size": 422,
+        "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/src/interact.js"
+      },
+      {
+        "type": "file",
+        "name": "logger.js",
+        "path": "src/logger.js",
+        "size": 1314,
+        "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/src/logger.js"
       }
     ]
+  },
+  {
+    "type": "directory",
+    "name": "test",
+    "path": "test",
+    "children": [
+      {
+        "type": "file",
+        "name": "createIgnore.test.js",
+        "path": "test/createIgnore.test.js",
+        "size": 644,
+        "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/test/createIgnore.test.js"
+      }
+    ]
+  },
+  {
+    "type": "file",
+    "name": "vitest.config.js",
+    "path": "vitest.config.js",
+    "size": 119,
+    "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/vitest.config.js"
   }
 ]
