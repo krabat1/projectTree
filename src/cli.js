@@ -28,7 +28,6 @@ export async function main() {
 
   /** @type {string} */
   const baseDir = path.resolve(process.cwd(), ...Array(depth).fill('..'));
-  console.log('baseDir_cli.js',baseDir)
 
   await runBuildFlow({ 
     githubUrl,

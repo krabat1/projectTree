@@ -5,6 +5,15 @@ import { prompt } from './interact.js';
 import { logger, setLogLevel } from './logger.js';
 import ignore from 'ignore';
 
+/** @type {boolean} */
+export let hashMode = false;
+/** @type {boolean} */
+/** @type {Array} */
+export const notExist = [];
+
+
+export async function getHashMode() { return hashMode }
+
 /** 
  * @function
  * @param {Object} params
@@ -32,11 +41,10 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
     process.exit(1);
   }
 
-  /** @type {string} */
-  const actualBranch = parts.branch;
-  if (actualBranch) {/** */ }
-  /** @type {{hashMode: boolean }} */
-  const { hashMode } = await askInput({ parts, verbose, depth, verboseArg, depthArg });
+
+
+
+  hashMode = await askInput({ parts, verbose, depth, verboseArg, depthArg });
 
   /** @type {string} */
   const gitignorePath = path.join(baseDir, '.gitignore');
@@ -44,8 +52,6 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
   const ptignorePath = path.join(baseDir, '.ptignore');
   /** @type {string[]} */
   const ignorePaths = [gitignorePath, ptignorePath];
-  /** @type {Array} */
-  const notExist = [];
 
   for (let ignorePath of ignorePaths) {
     try {
@@ -62,12 +68,18 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
     logger.step('👍 IT SEEMS TO HAVE BOTH IGNORE FILES\n');
   }
 
+
   if (notExist.length === 2) {
     /** @type {boolean | undefined} */
-    let create = await askIgnores('both');
-    if (create) {
+    let preCreate = await askIgnores('both');
+    /** @type {boolean} */
+    let create = true;
+    if (typeof preCreate === "boolean") {
+      create = preCreate
+    }
+    if (create || !create) {
       for (let ignorePath of ignorePaths) {
-        await createIgnore(ignorePath);
+        await createIgnore(ignorePath, create);
       }
     }
   } else if (notExist.length === 1) {
@@ -77,9 +89,15 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
       ? ignoreName = 'gitignore'
       : ignoreName = 'ptignore';
     /** @type {boolean | undefined} */
-    let create = await askIgnores(ignoreName);
-    if (create) {
-      await createIgnore(notExist[0]);
+    let preCreate = await askIgnores(ignoreName);
+    /** @type {boolean} */
+    let create = true;
+    if (typeof preCreate === "boolean") {
+      create = preCreate
+    }
+
+    if (create || !create) {
+      await createIgnore(notExist[0], create);
     }
   }
 
@@ -87,6 +105,7 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
 
   /** @type {ReturnType<typeof ignore>} */
   const ig = ignore()
+  //logger.trace('typeof ig: ', ig.constructor.name)
 
   logger.trace(`ADD IGNORES TO 'ig' OBJECT`)
 
@@ -95,12 +114,14 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
     try {
       await fs.access(ignorePath)
       result = await fs.readFile(ignorePath, 'utf8')
-      if (result) {
+      if (!result.trim()) {
+        logger.warn(`${ignorePath} is empty - nothing will be ignored`);
+      } else {
         ig.add(result.split(/\r?\n/))
         logger.trace(`ADDED: ${ignorePath}`);
       }
     } catch {
-      logger.trace(`FILE NOT EXIST: ${ignorePath}`);
+      logger.warn(`FILE NOT EXIST: ${ignorePath}`);
     }
   }
 
@@ -130,12 +151,11 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
  * @param {number} inputOptions.depth 
  * @param {string | undefined} inputOptions.verboseArg 
  * @param {string | undefined} inputOptions.depthArg 
- * @returns {Promise<{hashMode: boolean }>}
+ * @returns {Promise<boolean >}
  */
-async function askInput(inputOptions) {
+export async function askInput(inputOptions) {
   const { parts, verbose, depth, verboseArg, depthArg } = inputOptions
-  /** @type {boolean} */
-  let hashMode = false;
+  hashMode = false;
   if (/^[0-9a-f]{40}$/.test(parts.branch)) {
     hashMode = true;
   }
@@ -188,9 +208,15 @@ async function askInput(inputOptions) {
 
   /** @type {string} */
   let answer;
-  do {
-    answer = await prompt("❓  Swap / eXit / Continue ? (s/x/c): ");
-  } while (!['x', 's', 'c'].includes(answer.toLowerCase().trim()));
+  if (hashMode) {
+    do {
+      answer = await prompt("❓  Swap / eXit / Continue ? (s/x/c): ");
+    } while (!['x', 's', 'c'].includes(answer.toLowerCase().trim()));
+  } else {
+    do {
+      answer = await prompt("❓  eXit / Continue ? (x/c): ");
+    } while (!['x', 'c'].includes(answer.toLowerCase().trim()));
+  }
 
   if (hashMode && answer.toLowerCase() === 's') {
     hashMode = !hashMode;
@@ -199,10 +225,10 @@ async function askInput(inputOptions) {
     console.log('✔️   Continue process\n');
   } else if (answer.toLowerCase() === 'x') {
     console.log(`❌   Quitting at the user's request.\n`);
-    process.exit(0);
+    process.exit(1);
   }
 
-  return { hashMode };
+  return hashMode;
 }
 
 /** @function 
@@ -210,16 +236,16 @@ async function askInput(inputOptions) {
  * @param {string} ignoreName
  * @returns {Promise<boolean | undefined>}
 */
-async function askIgnores(ignoreName) {
+export async function askIgnores(ignoreName) {
 
   /** @type {string} */
   let answer = '';
   if (ignoreName === null) return;
   do {
     if (ignoreName === 'both') {
-      answer = await prompt("❓  There are no ignore files in the root directory, should I create them? (y/n): ");
+      answer = await prompt("❓  There are no ignore files in the root directory, should I create them with base content (for an empty file choose no)? (y/n): ");
     } else if (ignoreName === 'gitignore' || ignoreName === 'ptignore') {
-      answer = await prompt(`There is no .${ignoreName} file in the root directory, should I create them? (y/n): `);
+      answer = await prompt(`There is no .${ignoreName} file in the root directory, should I create them with base content (for an empty file choose no)? (y/n): `);
     }
   } while (!['y', 'n'].includes(answer.toLowerCase()))
 
@@ -229,9 +255,10 @@ async function askIgnores(ignoreName) {
 /** @function 
  * @name createIgnore
  * @param {string} filePath
+ * @param {boolean} answer
  * @returns {Promise<void>}
 */
-export async function createIgnore(filePath) {
+export async function createIgnore(filePath, answer) {
   /** @type {{
    * gitignore: string[],
    * ptignore: string[]
@@ -266,7 +293,7 @@ export async function createIgnore(filePath) {
     const which = base;
     logger.trace('WHICH IGNORE FILE? .', which, '\n')
     /** @type {string} */
-    const data = content[which]?.join("\n");
+    let data = content[which]?.join("\n");
     /** @type {string} */
     const messageTryText = ` 🔧  ${filePath}\n🟡   🔧  Let's try to create it and upload it with basic content.\n`
     messageTry = {
@@ -274,9 +301,16 @@ export async function createIgnore(filePath) {
       ptignore: messageTryText
     }
     logger.step(messageTry[which]);
+    if (!answer) { data = ''; }
     await fs.writeFile(filePath, data);
     /** @type {string} */
-    const messageDoneText = ` ✔️  ${filePath}\n🟡   ✔️  Created it with the basic ignore content.\n`
+    let messageDoneText;
+    if (!answer) {
+      messageDoneText = ` ✔️  ${filePath}\n🟡   ✔️  Created it without content, as you wish.\n`
+    } else {
+      /** @type {string} */
+      messageDoneText = ` ✔️  ${filePath}\n🟡   ✔️  Created it with the basic ignore content.\n`
+    }
     messageDone = {
       gitignore: messageDoneText,
       ptignore: messageDoneText
@@ -296,7 +330,8 @@ export async function createIgnore(filePath) {
  * @param {ReturnType<typeof ignore>} ig
  * @returns {boolean}
 */
-const isIgnored = (relPath, ig) => {
+
+export const isIgnored = (relPath, ig) => {
   /** @type {string} */
   const normalizedPath = relPath.replace(/\\/g, '/');
   /** @type {boolean} */
@@ -482,6 +517,6 @@ export function parseGithubUrl(input) {
   /** @type {Array} */
   const [user, repo, ...rest] = parts;
   /** @type {string} */
-  const branch = rest.join('/') || 'main';
+  const branch = rest.join('/');
   return { user, repo, branch };
 }
