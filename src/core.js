@@ -1,3 +1,5 @@
+// @ts-check
+
 import process from 'node:process';
 import path from 'node:path';
 import fs from 'node:fs/promises';
@@ -10,7 +12,6 @@ export let hashMode = false;
 /** @type {boolean} */
 /** @type {Array} */
 export const notExist = [];
-
 
 export async function getHashMode() { return hashMode }
 
@@ -69,34 +70,29 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
   }
 
 
-  if (notExist.length === 2) {
+  if (notExist.length > 0) {
     /** @type {boolean | undefined} */
-    let preCreate = await askIgnores('both');
+    let preCreate;
+    if (notExist.length === 2) {
+      preCreate = await askIgnores('both');
+    } else if (notExist.length === 1) {
+      /** @type {string} */
+      let ignoreName;
+      ((notExist[0]).endsWith('gitignore'))
+        ? ignoreName = 'gitignore'
+        : ignoreName = 'ptignore';
+      preCreate = await askIgnores(ignoreName);
+    }
     /** @type {boolean} */
     let create = true;
     if (typeof preCreate === "boolean") {
       create = preCreate
     }
-    if (create || !create) {
+    if (notExist.length === 2) {
       for (let ignorePath of ignorePaths) {
         await createIgnore(ignorePath, create);
       }
-    }
-  } else if (notExist.length === 1) {
-    /** @type {string} */
-    let ignoreName;
-    ((notExist[0]).endsWith('gitignore'))
-      ? ignoreName = 'gitignore'
-      : ignoreName = 'ptignore';
-    /** @type {boolean | undefined} */
-    let preCreate = await askIgnores(ignoreName);
-    /** @type {boolean} */
-    let create = true;
-    if (typeof preCreate === "boolean") {
-      create = preCreate
-    }
-
-    if (create || !create) {
+    } else {
       await createIgnore(notExist[0], create);
     }
   }
@@ -139,7 +135,6 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
   const outPath = path.join(baseDir, 'projectTree.json');
   await fs.writeFile(outPath, JSON.stringify(tree, null, 2));
   console.log(`💎   projectTree.json created: ${outPath}`);
-
 }
 
 /**
@@ -181,12 +176,13 @@ export async function askInput(inputOptions) {
   console.log('');
   if (verboseArg === undefined) {
     console.log("💬  You not set the --verbose argument, we will only\n     inform you of the most necessary information.")
-  } else if (verbose === 0) {
-    console.log("💬  You set the --verbose argument to 0, we will only\n    inform you of the most necessary information.")
-  } else if (verbose === 1) {
-    console.log("💬  You set the --verbose argument to 1, we will\n    inform you about the most important steps")
-  } else if (verbose === 2) {
-    console.log("💬  You set the --verbose argument to 2, we\n    will inform you about every small step. ")
+  } else {
+    const text = [
+      "we will only\n    inform you of the most necessary information.",
+      "we will\n    inform you about the most important steps",
+      "we\n    will inform you about every small step."
+    ]
+    console.log(`💬  You set the --verbose argument to ${verbose},  ${text[verbose]}`)
   }
   if (depthArg === undefined) {
     console.log("❗️  --depth: You did not specify a --depth argument, so we assume\n    that your application's entry point is at its root (0).")
@@ -290,7 +286,7 @@ export async function createIgnore(filePath, answer) {
       throw new Error(`Unsupported ignore file type: ${filePath}`);
     }
     /** @type {'gitignore' | 'ptignore'} */
-    const which = base;
+    const which = /** @type {'gitignore' | 'ptignore'} */ (base);
     logger.trace('WHICH IGNORE FILE? .', which, '\n')
     /** @type {string} */
     let data = content[which]?.join("\n");
