@@ -59,7 +59,7 @@
     "type": "file",
     "name": "projectTree.json",
     "path": "projectTree.json",
-    "size": 881596,
+    "size": 4453,
     "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/projectTree.json"
   },
   {
@@ -85,7 +85,7 @@
         "type": "file",
         "name": "core.js",
         "path": "src/core.js",
-        "size": 16414,
+        "size": 16224,
         "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/src/core.js"
       },
       {
@@ -99,7 +99,7 @@
         "type": "file",
         "name": "logger.js",
         "path": "src/logger.js",
-        "size": 1314,
+        "size": 1537,
         "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/src/logger.js"
       }
     ]
@@ -113,28 +113,28 @@
         "type": "file",
         "name": "createIgnore.test.js",
         "path": "test/createIgnore.test.js",
-        "size": 1555,
+        "size": 1571,
         "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/test/createIgnore.test.js"
       },
       {
         "type": "file",
         "name": "interact.test.js",
         "path": "test/interact.test.js",
-        "size": 7481,
+        "size": 7549,
         "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/test/interact.test.js"
       },
       {
         "type": "file",
         "name": "parseGithubUrl.test.js",
         "path": "test/parseGithubUrl.test.js",
-        "size": 1778,
+        "size": 1717,
         "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/test/parseGithubUrl.test.js"
       },
       {
         "type": "file",
         "name": "runBuildFlow.test.js",
         "path": "test/runBuildFlow.test.js",
-        "size": 5272,
+        "size": 5253,
         "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/test/runBuildFlow.test.js"
       }
     ]
