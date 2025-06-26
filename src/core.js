@@ -19,14 +19,12 @@ export async function getHashMode() { return hashMode }
  * @function
  * @param {Object} params
  * @param {string|null} params.githubUrl
- * @param {number} params.depth
  * @param {number} params.verbose
  * @param {string} params.baseDir
  * @param {string | undefined} params.verboseArg
- * @param {string | undefined} params.depthArg
  * @returns {Promise<void>}
  */
-export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verboseArg, depthArg }) {
+export async function runBuildFlow({ githubUrl, verbose, baseDir, verboseArg }) {
   if (!githubUrl) {
     logger.error('--github-url argument is required');
     logger.error('       format: <user>/<repo>/<branch|commit>');
@@ -45,7 +43,7 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
 
 
 
-  hashMode = await askInput({ parts, verbose, depth, verboseArg, depthArg });
+  hashMode = await askInput({ parts, verbose, verboseArg });
 
   /** @type {string} */
   const gitignorePath = path.join(baseDir, '.gitignore');
@@ -143,13 +141,11 @@ export async function runBuildFlow({ githubUrl, depth, verbose, baseDir, verbose
  * @param {Object} inputOptions 
  * @param {{ user:string, repo: string, branch: string }} inputOptions.parts 
  * @param {number} inputOptions.verbose 
- * @param {number} inputOptions.depth 
  * @param {string | undefined} inputOptions.verboseArg 
- * @param {string | undefined} inputOptions.depthArg 
  * @returns {Promise<boolean >}
  */
 export async function askInput(inputOptions) {
-  const { parts, verbose, depth, verboseArg, depthArg } = inputOptions
+  const { parts, verbose, verboseArg } = inputOptions
   hashMode = false;
   if (/^[0-9a-f]{40}$/.test(parts.branch)) {
     hashMode = true;
@@ -183,13 +179,6 @@ export async function askInput(inputOptions) {
       "we\n    will inform you about every small step."
     ]
     console.log(`💬  You set the --verbose argument to ${verbose},  ${text[verbose]}`)
-  }
-  if (depthArg === undefined) {
-    console.log("❗️  --depth: You did not specify a --depth argument, so we assume\n    that your application's entry point is at its root (0).")
-  } else if (depth === 0) {
-    console.log(`--depth=0: You have defined the entry point of your application in its root.`)
-  } else {
-    console.log(`--depth=${depth}: The entry point of your application is ${depth} directory levels deep from its root.`)
   }
 
 

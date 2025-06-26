@@ -59,14 +59,14 @@
     "type": "file",
     "name": "projectTree.json",
     "path": "projectTree.json",
-    "size": 4453,
+    "size": 4451,
     "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/projectTree.json"
   },
   {
     "type": "file",
     "name": "README.md",
     "path": "README.md",
-    "size": 3089,
+    "size": 2963,
     "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/README.md"
   },
   {
@@ -78,14 +78,14 @@
         "type": "file",
         "name": "cli.js",
         "path": "src/cli.js",
-        "size": 1120,
+        "size": 1019,
         "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/src/cli.js"
       },
       {
         "type": "file",
         "name": "core.js",
         "path": "src/core.js",
-        "size": 16224,
+        "size": 15547,
         "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/src/core.js"
       },
       {
@@ -120,7 +120,7 @@
         "type": "file",
         "name": "interact.test.js",
         "path": "test/interact.test.js",
-        "size": 7549,
+        "size": 7367,
         "githubRaw": "https://raw.githubusercontent.com/krabat1/projectTree/refs/heads/main/test/interact.test.js"
       },
       {

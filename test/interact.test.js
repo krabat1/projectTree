@@ -15,7 +15,6 @@ const githubUrl = [branch, hash, 'krabat1/projectTree'];
 const ignorefiles = ['00', '01', '10', '11'];
 const answerPrompt1 = ['x', 'c', 's'];
 const answerPrompt2 = ['y', 'n'];
-const depthArg = [undefined];
 const verboseArg = [undefined];
 
 const testCases = [];
@@ -27,8 +26,7 @@ githubUrl.forEach(a => {
   ignorefiles.forEach(b => {
     answerPrompt1.forEach(c => {
       answerPrompt2.forEach(d => {
-        depthArg.forEach(e => {
-          verboseArg.forEach(f => {
+          verboseArg.forEach(e => {
             const lastSegment = a.split('/').pop();
             const isHash = typeof lastSegment === 'string' && /^[0-9a-f]{40}$/.test(lastSegment);
             testCases.push({
@@ -36,12 +34,10 @@ githubUrl.forEach(a => {
               ignorefiles: b.split('').map(Number),
               answerPrompt1: c,
               answerPrompt2: d,
-              depthArg: e,
-              verboseArg: f,
+              verboseArg: e,
               isHash
             });
           });
-        });
       });
     });
   });
@@ -97,11 +93,9 @@ describe('prompt', () => {
       try {
         await runBuildFlow({
           githubUrl: testCase.githubUrl,
-          depth: testCase.depthArg,
           verbose: testCase.verboseArg,
           baseDir: tempDir,
           verboseArg: testCase.verboseArg,
-          depthArg: testCase.depthArg,
         });
       } catch (err) {
         threw = err;

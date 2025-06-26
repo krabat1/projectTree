@@ -40,7 +40,6 @@ npm install -D project-tree
 ```bash
 project-tree \
   --github-url=krabat1/projectTree/main \
-  --depth=0 \
   --verbose=2
 ```
 
@@ -51,14 +50,12 @@ Use the CLI directly without installing:
 ```bash
 npx github:krabat1/projectTree \
   --github-url=krabat1/projectTree/main \
-  --depth=0 \
   --verbose=2
 ```
 
 ## Arguments
 
 * `--github-url=<user>/<repo>/<branch|commit>` – **(required)** GitHub repo reference
-* `--depth=<number>` – Depth of the working directory relative to project root (default `0`)
 * `--verbose=<0|1|2>` – Logging detail level:
 
   * `0`: Only critical info (default)

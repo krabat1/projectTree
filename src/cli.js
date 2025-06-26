@@ -15,28 +15,23 @@ export async function main() {
   /** @type {string} */
   const githubArg = args.find(arg => arg.startsWith('--github-url='));
   /** @type {string | undefined} */
-  const depthArg = args.find(arg => arg.startsWith('--depth=')) ?? undefined;
-  /** @type {string | undefined} */
   const verboseArg = args.find(arg => arg.startsWith('--verbose=')) ?? undefined;
 
   /** @type {string | null} */
   const githubUrl = githubArg ? githubArg.split('=')[1] : null;
   /** @type {number} */
-  const depth = depthArg ? parseInt(depthArg.split('=')[1], 10) : 0;
-  /** @type {number} */
   const verbose = verboseArg ? parseInt(verboseArg.split('=')[1], 10) : 0;
 
   /** @type {string} */
-  const baseDir = path.resolve(process.cwd(), ...Array(depth).fill('..'));
+  const baseDir = path.resolve(process.cwd());
+  //const baseDir = path.resolve(process.cwd(), ...Array(depth).fill('..'));
   console.log('process.cwd(): ', process.cwd())
   console.log('baseDir: ', baseDir)
 
   await runBuildFlow({ 
     githubUrl,
-    depth,
     verbose,
     baseDir,
     verboseArg,
-    depthArg
   });
 }
